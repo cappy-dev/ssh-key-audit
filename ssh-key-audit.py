@@ -351,7 +351,10 @@ def main():
     print(f"Critical issues: {total_issues}")
     print(f"Warnings: {total_warnings}")
     
-    # Write JSON report
+    # Write reports even on a fresh account without an existing .ssh directory.
+    report_dir = Path(REPORT_PATH).parent
+    report_dir.mkdir(parents=True, exist_ok=True)
+
     with open(REPORT_PATH, "w") as f:
         json.dump(results, f, indent=2)
     print(f"\n[*] JSON report written to: {REPORT_PATH}")
